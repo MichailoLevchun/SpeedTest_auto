@@ -32,8 +32,8 @@ public class AppBO {
 		LOGGER.info("Open and run Speed test");
 		speedTestPO.startSpeedTest();
 		LOGGER.info("Get speed information");
-		speedTestPO.getInternetSpeedValues().entrySet().forEach(
-				x -> LOGGER.info(x.getKey() + StringUtils.SPACE + x.getValue())
+		speedTestPO.getInternetSpeedValues().forEach(
+				(key, value) -> LOGGER.info(key + StringUtils.SPACE + value)
 		);
 	}
 }
