@@ -7,8 +7,6 @@ import io.appium.java_client.pagefactory.AndroidFindBy;
 import java.util.HashMap;
 import java.util.Map;
 
-import static java.lang.Thread.sleep;
-
 public class SpeedTestPO extends BasePO {
 	@AndroidFindBy(xpath = "//*[@resource-id = 'org.zwanoo.android.speedtest:id/welcome_message_next_button']")
 	private MobileElement nextButton;
@@ -34,6 +32,9 @@ public class SpeedTestPO extends BasePO {
 	@AndroidFindBy(xpath = "//*[@content-desc='Jitter']//*//*[@resource-id = 'org.zwanoo.android.speedtest:id/txt_test_result_value']")
 	private MobileElement getJitterSpeed;
 
+	@AndroidFindBy(xpath = "//*[@resource-id = 'org.zwanoo.android.speedtest:id/suite_completed_feedback_assembly_test_again']")
+	private MobileElement tryAgainButton;
+
 	public SpeedTestPO(AndroidDriver<? extends MobileElement> driver, int pageUpdateTimeOut) {
 		super(driver, pageUpdateTimeOut);
 	}
@@ -41,15 +42,10 @@ public class SpeedTestPO extends BasePO {
 	public void startSpeedTest() {
 		nextButton.click();
 		continueButton.click();
-
 		denyButton.click();
 		denyButton.click();
 		goButton.click();
-		try {
-			sleep(40000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		waitUntilIsClickable(tryAgainButton);
 	}
 
 	public Map<String, String> getInternetSpeedValues() {
